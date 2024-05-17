@@ -1,0 +1,44 @@
+package com.finance.smartbudget.model.transactions;
+
+import com.finance.smartbudget.model.user.User;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Entity
+@NoArgsConstructor
+public @Data class Expense implements TransactionOperation{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private BigDecimal transactionSum;
+    private String category;
+    private String description;
+    private Long bankId;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @ManyToOne
+    private User user;
+    private BigDecimal cashBackSum;
+
+
+    public Expense(BigDecimal transactionSum, String category, String description, Long bankId, User user, BigDecimal cashBackSum) {
+        this.transactionSum = transactionSum;
+        this.category = category;
+        this.description = description;
+        this.bankId = bankId;
+        this.user = user;
+        this.cashBackSum = cashBackSum;
+    }
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+    @Override
+    public BigDecimal getTransactionSum() {
+        return transactionSum;
+    }
+}
