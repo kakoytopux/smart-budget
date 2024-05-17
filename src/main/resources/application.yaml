@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: ${DB_LOGIN}
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/smart-budget-temp
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
