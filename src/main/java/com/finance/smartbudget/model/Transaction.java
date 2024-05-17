@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
@@ -30,6 +31,12 @@ public @Data class Transaction {
         this.createdAt = createdAt;
         this.user = user;
         this.cashBackSum = cashBackSum;
+    }
+
+    public Transaction(LocalDate createdAt, BigDecimal transactionSum, String description) {
+        this.transactionSum = transactionSum;
+        this.createdAt = LocalDateTime.from(createdAt);
+        this.description = description;
     }
 
     @PrePersist

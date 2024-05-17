@@ -6,6 +6,7 @@ import com.finance.smartbudget.model.Transaction;
 import com.finance.smartbudget.repository.TransactionRepository;
 import com.finance.smartbudget.service.security.MyUserDataStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
