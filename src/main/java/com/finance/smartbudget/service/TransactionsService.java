@@ -6,8 +6,8 @@ import com.finance.smartbudget.model.Transaction;
 import com.finance.smartbudget.repository.TransactionRepository;
 import com.finance.smartbudget.service.security.MyUserDataStorageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,15 +19,15 @@ public class TransactionsService {
     private final TransactionRepository transactionRepository;
     private final TransactionsMapper transactionsMapper;
     @Transactional
-    public List<TransactionDto> getAllMyUserTransactions() {
+    public List<TransactionDto> getAllMyTransactions() {
         return transactionRepository.
                 findAllByUser(myUserData.getMyUser())
                 .stream()
                 .map(transactionsMapper::convertEntity2Dto)
                 .toList();
     }
-    @Transactional
-    public void addNewTransaction(TransactionDto transactionDto) {
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void addMyTransactionAndUpdateBalance(TransactionDto transactionDto) {
         transactionRepository.save(
                 new Transaction(transactionDto.getTransactionSum(),
                         transactionDto.getCategory(),
@@ -37,5 +37,11 @@ public class TransactionsService {
                         myUserData.getMyUser(),
                         transactionDto.getCashBackSum())
         );
+        myUserData.getMyUser()
+                .setAccountBalance(myUserData
+                        .getMyUser()
+                        .getAccountBalance()
+                        .add(transactionDto.getTransactionSum())
+                );
     }
 }

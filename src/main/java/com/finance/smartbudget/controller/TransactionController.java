@@ -12,12 +12,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionController {
     private final TransactionsService transactionsService;
-    @PostMapping("/add-transaction")
-    public void addTransaction(@RequestBody TransactionDto transactionDto) {
-        transactionsService.addNewTransaction(transactionDto);
+    @PostMapping("/add-my-transaction")
+    public void addMyTransaction(@RequestBody TransactionDto transactionDto) {
+        transactionsService.addMyTransactionAndUpdateBalance(transactionDto);
     }
     @GetMapping ("/get-all-my-transactions")
-    public List<TransactionDto> getAllTransactions() {
-        return transactionsService.getAllMyUserTransactions();
+    public List<TransactionDto> getAllMyTransactions() {
+        return transactionsService.getAllMyTransactions();
     }
+
 }
