@@ -1,4 +1,5 @@
 package com.finance.smartbudget.config.security;
+
 import com.finance.smartbudget.service.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +29,13 @@ public class SecurityConfig {
                         auth.requestMatchers(
                                         "/sign-up",
                                         "/sign-up-page",
-                                "/sign-in-page",
-                                "/actuator/prometheus"
+                                        "/sign-in-page",
+                                        "/actuator/prometheus",
+                                        "/swagger-ui.html",
+                                        "/swagger-ui/**",
+                                        "/**",
+                                        "/isAlive",
+                                        "/v3/api-docs/**"
                                 )
                                 .permitAll()
                                 .requestMatchers("/**").authenticated())

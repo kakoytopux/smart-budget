@@ -30,4 +30,6 @@ management:
     metrics:
       export:
         enabled: true
-
+  springdoc:
+    swagger-ui:
+      enabled: true
