@@ -17,3 +17,10 @@ CREATE TABLE IF NOT EXISTS transactions (
     user_id BIGINT,
     cash_back_sum DECIMAL
 );
+
+ALTER TABLE transactions
+    ADD CONSTRAINT fk_transactions_user_id
+        FOREIGN KEY (user_id)
+            REFERENCES users (id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE;

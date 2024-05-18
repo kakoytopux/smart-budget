@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: postgres
-    password: root
-    url: jdbc:postgresql://localhost:5432/smart
+    username: admin
+    password: 123
+    url: jdbc:postgresql://localhost:5433/smart_budget
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

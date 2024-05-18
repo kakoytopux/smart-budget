@@ -22,8 +22,12 @@ public class UserService {
     private final MyUserDataStorageService myUserData;
 
     @Transactional
-    public void encryptPasswordAndSaveNewUser(UserDto userDto) {
-        userRepository.save(new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new BigDecimal(0)));
+    public String encryptPasswordAndSaveNewUser(UserDto userDto) {
+        if(!userRepository.existsByUsername(userDto.getUsername())) {
+            userRepository.save(new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new BigDecimal(0)));
+            return "";
+        }
+        return "there is user with such name!";
     }
 
     @Transactional

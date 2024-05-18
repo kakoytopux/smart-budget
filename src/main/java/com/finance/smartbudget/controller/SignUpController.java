@@ -21,7 +21,12 @@ public class SignUpController {
     private final UserService userService;
     @PostMapping("/sign-up")
     public ResponseEntity<Map<String, String>> signUpNewUser(@RequestBody UserDto userDto) {
-        userService.encryptPasswordAndSaveNewUser(userDto);
-        return ResponseEntity.ok(Map.of("is_signup_success","true","error_message","no errors"));
+        String status = userService.encryptPasswordAndSaveNewUser(userDto);
+        boolean isSignUpSuccess = status.isEmpty();
+        if(isSignUpSuccess) {
+            return ResponseEntity.ok(Map.of("is_signup_success","true","error_message","no errors"));
+        }
+        return ResponseEntity.badRequest().body(Map.of("is_signup_success","false","error_message","there is user with such username"));
+
     }
 }

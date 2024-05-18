@@ -14,7 +14,7 @@ public class StatementAnalyzerService {
     public BigDecimal calculateTotalAmount() {
         BigDecimal total = BigDecimal.ZERO;
         for (final Transaction bankTransaction : bankTransactions) {
-            total = total.add(bankTransaction.getTransactionSum());
+            total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(),bankTransaction.getCashBackSum()));
         }
         return total;
     }
@@ -23,7 +23,7 @@ public class StatementAnalyzerService {
         BigDecimal total = BigDecimal.ZERO;
         for (final Transaction bankTransaction : bankTransactions) {
             if (bankTransaction.getCreatedAt().getMonth() == month) {
-                total = total.add(bankTransaction.getTransactionSum());
+                total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(),bankTransaction.getCashBackSum()));
             }
         }
         return total;
@@ -33,9 +33,12 @@ public class StatementAnalyzerService {
         BigDecimal total = BigDecimal.ZERO;
         for (final Transaction bankTransaction : bankTransactions) {
             if (bankTransaction.getDescription().equals(category)) {
-                total = total.add(bankTransaction.getTransactionSum());
+                total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(),bankTransaction.getCashBackSum()));
             }
         }
         return total;
+    }
+    public BigDecimal subtractCashBaskFromSum(BigDecimal transactionSum,BigDecimal cashBackSum) {
+        return transactionSum.subtract(cashBackSum);
     }
 }
