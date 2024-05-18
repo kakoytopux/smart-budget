@@ -1,4 +1,4 @@
-package com.finance.smartbudget.controller;
+package com.finance.smartbudget.controller.user;
 
 import com.finance.smartbudget.service.UserService;
 import lombok.RequiredArgsConstructor;

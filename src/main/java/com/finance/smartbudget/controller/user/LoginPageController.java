@@ -1,4 +1,4 @@
-package com.finance.smartbudget.controller;
+package com.finance.smartbudget.controller.user;
 
 
 import org.springframework.stereotype.Controller;

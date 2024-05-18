@@ -1,10 +1,12 @@
 package com.finance.smartbudget.service;
 
+import com.finance.smartbudget.dto.BalancePointDto;
 import com.finance.smartbudget.model.Transaction;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -40,5 +42,18 @@ public class StatementAnalyzerService {
     }
     public BigDecimal subtractCashBaskFromSum(BigDecimal transactionSum,BigDecimal cashBackSum) {
         return transactionSum.subtract(cashBackSum);
+    }
+    public List<BalancePointDto> convertTransactionsToBalancePoints() {
+        List<BalancePointDto> balancePoints = new ArrayList<>();
+        BigDecimal prevUserBalance = BigDecimal.ZERO;
+        for (Transaction transaction : bankTransactions) {
+            prevUserBalance = prevUserBalance.add(subtractCashBaskFromSum(transaction.getTransactionSum(),transaction.getCashBackSum()));
+            balancePoints.add(
+                new BalancePointDto(
+                    prevUserBalance,
+                    transaction.getCreatedAt())
+            );
+        }
+        return balancePoints;
     }
 }
