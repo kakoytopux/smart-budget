@@ -28,7 +28,8 @@ public class SecurityConfig {
                         auth.requestMatchers(
                                         "/sign-up",
                                         "/sign-up-page",
-                                "/sign-in-page"
+                                "/sign-in-page",
+                                "/actuator/prometheus"
                                 )
                                 .permitAll()
                                 .requestMatchers("/**").authenticated())

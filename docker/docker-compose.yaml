@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 
 services:
   db:
@@ -9,5 +9,33 @@ services:
       POSTGRES_PASSWORD: 123
     ports:
       - "5433:5432"
+#    volumes:
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  grafana:
+    build: './config/grafana'
+    ports:
+      - 3000:3000
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      monitoring:
+        aliases:
+          - grafana
+  prometheus:
+      image: prom/prometheus
+      ports:
+        - 9090:9090
+      volumes:
+        - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+        - ./prometheus:/prometheus
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
+      networks:
+        monitoring:
+          aliases:
+            - prometheus
+networks:
+  monitoring:
