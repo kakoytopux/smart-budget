@@ -5,7 +5,7 @@ spring:
   datasource:
     username: admin
     password: 123
-    url: jdbc:postgresql://localhost:5433/smart_budget
+    url: jdbc:postgresql://localhost:5433/smart-budget
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

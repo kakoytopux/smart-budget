@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 @Entity
 @NoArgsConstructor
 @Table(name = "transactions")
@@ -34,9 +36,9 @@ public @Data class Transaction {
         this.cashBackSum = cashBackSum;
     }
 
-    public Transaction(LocalDate createdAt, BigDecimal transactionSum, String description) {
+    public Transaction(LocalDateTime createdAt, BigDecimal transactionSum, String description) {
         this.transactionSum = transactionSum;
-        this.createdAt = LocalDateTime.from(createdAt);
+        this.createdAt = createdAt;;
         this.description = description;
     }
 
