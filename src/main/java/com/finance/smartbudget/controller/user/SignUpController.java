@@ -19,6 +19,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SignUpController {
     private final UserService userService;
+
+    /**
+     Регистрации нового пользователя с уникальным именем
+     */
     @PostMapping("/sign-up")
     public ResponseEntity<Map<String, String>> signUpNewUser(@RequestBody UserDto userDto) {
         String status = userService.encryptPasswordAndSaveNewUser(userDto);

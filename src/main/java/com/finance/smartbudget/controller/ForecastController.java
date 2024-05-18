@@ -21,6 +21,10 @@ import java.util.Map;
 public class ForecastController {
     private final BalanceForecastService balanceForecastService;
 
+    /**
+     Предсказать возможный баланс текущего авторизованного пользователя в определенную дату (формат dd.MM.yyyy)
+     */
+
     @PostMapping("/forecast-balance-at-date")
     public Map<String, BigDecimal> forecastBalanceAtDate(@RequestParam("date") String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -33,6 +37,10 @@ public class ForecastController {
         BigDecimal expectedSum = balanceForecastService.forecastBalanceAtDate(date);
         return Map.of("expected_sum_on_date", expectedSum);
     }
+
+    /**
+     Предугадать возможный баланс пользователя (текущего авторизованного) за следующие 30 дней относительно последней транзакции
+     */
     @PostMapping("/forecast-balance-on-month")
     public Map<String, List<BalancePointDto>> forecastBalanceOnMonth() {
         return Map.of("expected_sums_on_next_month",balanceForecastService.forecastBalanceOnNextMonth());

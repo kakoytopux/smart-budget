@@ -15,16 +15,25 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
+    /**
+     Получение баланса текущего авторизованного пользователя
+     */
     @GetMapping("/get-my-balance")
     public Map<String, BigDecimal> getMyBalance() {
         return Map.of("my_balance", userService.calculateMyBalance());
     }
 
+    /**
+     Получение баланса за определенных месяц
+     */
     @GetMapping("/get-my-balance-in-month/{month}")
     public Map<String, BigDecimal> getMyBalanceInMonth(@PathVariable Month month) {
         return Map.of("my_balance_in_month", userService.calculateMyBalanceByMonth(month));
     }
 
+    /**
+     Получение товара только определенной категории
+     */
     @GetMapping("/get-my-balance-in-month/{category}")
     public Map<String, BigDecimal> getMyBalanceForCategory(@PathVariable String category) {
         return Map.of("my_balance_in_month", userService.calculateMyBalanceByCategory(category));

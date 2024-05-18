@@ -38,6 +38,9 @@ public class BankStatementAnalyserController {
                 + statementAnalyzerService.calculateTotalForCategory("Salary"));
     }
 
+    /**
+     Загрузка файла с транзакциями (предполагается что в будущем из банка)
+     */
     @RequestMapping(value = "/upload", method = RequestMethod.POST,
             headers = "Accept=application/json, application/xml, multipart/form-data")
     public ResponseEntity<?> upload(
