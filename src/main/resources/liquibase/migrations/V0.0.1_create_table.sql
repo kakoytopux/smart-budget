@@ -1,3 +1,6 @@
+--liquibase formatted sql
+--changeset puxichhh:1
+
 CREATE SCHEMA IF NOT EXISTS smart_budget;
 
 CREATE TABLE IF NOT EXISTS smart_budget.users (
