@@ -1,11 +1,14 @@
 package com.finance.smartbudget.service;
 
+import com.finance.smartbudget.config.security.CustomUserDetails;
 import com.finance.smartbudget.dto.UserDto;
 import com.finance.smartbudget.model.user.User;
 import com.finance.smartbudget.repository.TransactionRepository;
 import com.finance.smartbudget.repository.UserRepository;
 import com.finance.smartbudget.service.security.MyUserDataStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +41,15 @@ public class UserService {
         return "there is user with such name!";
     }
 
+    public CustomUserDetails getByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
+        return new CustomUserDetails(user);
+    }
+    public UserDetailsService userDetailsService() {
+        return this::getByUsername;
+    }
+
     @Transactional
     public BigDecimal calculateMyBalance() {
         StatementAnalyzerService statementAnalyzerService = getStatementAnalyzerByAllMyTransactions();
@@ -64,4 +76,5 @@ public class UserService {
             transactionRepository.findAllByUser(myUserData.getMyUser())
         );
     }
+
 }

@@ -31,3 +31,25 @@ build/
 
 ### VS Code ###
 .vscode/
+/docker/prometheus/lock
+/docker/prometheus/01HY7KKR1PPD7JWERTYVRCF7VV/meta.json
+/docker/prometheus/01HY7KKTVHE2EJNR5TPYXNMYZH/meta.json
+/docker/prometheus/01HY7KKV8EJP7WY59T0N47723W/meta.json
+/docker/prometheus/queries.active
+/docker/prometheus/01HY7KKR1PPD7JWERTYVRCF7VV/tombstones
+/docker/prometheus/01HY7KKTVHE2EJNR5TPYXNMYZH/tombstones
+/docker/prometheus/01HY7KKV8EJP7WY59T0N47723W/tombstones
+/docker/prometheus/wal/checkpoint.00000010/00000000
+/docker/prometheus/01HY7KKR1PPD7JWERTYVRCF7VV/chunks/000001
+/docker/prometheus/01HY7KKTVHE2EJNR5TPYXNMYZH/chunks/000001
+/docker/prometheus/01HY7KKV8EJP7WY59T0N47723W/chunks/000001
+/docker/prometheus/chunks_head/000010
+/docker/grafana/grafana.db
+/docker/prometheus/01HY7KKR1PPD7JWERTYVRCF7VV/index
+/docker/prometheus/01HY7KKTVHE2EJNR5TPYXNMYZH/index
+/docker/prometheus/01HY7KKV8EJP7WY59T0N47723W/index
+/docker/prometheus/chunks_head/000011
+/docker/prometheus/wal/00000011
+/docker/prometheus/wal/00000012
+/docker/prometheus/wal/00000013
+/docker/grafana/alerting/1/__default__.tmpl
