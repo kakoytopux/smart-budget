@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @Data
 public class UserDto {
-    private final String username;
-    private final String password;
+    private String username;
+    private String password;
     private BigDecimal accountBalance = new BigDecimal(0);
 }
