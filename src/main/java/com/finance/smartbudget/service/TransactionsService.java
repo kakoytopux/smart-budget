@@ -18,30 +18,33 @@ public class TransactionsService {
     private final MyUserDataStorageService myUserData;
     private final TransactionRepository transactionRepository;
     private final TransactionsMapper transactionsMapper;
+
     @Transactional
     public List<TransactionDto> getAllMyTransactions() {
         return transactionRepository.
-                findAllByUser(myUserData.getMyUser())
-                .stream()
-                .map(transactionsMapper::convertEntity2Dto)
-                .toList();
+            findAllByUser(myUserData.getMyUser())
+            .stream()
+            .map(transactionsMapper::convertEntity2Dto)
+            .toList();
     }
+
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void addMyTransactionAndUpdateBalance(TransactionDto transactionDto) {
         transactionRepository.save(
-                new Transaction(transactionDto.getTransactionSum(),
-                        transactionDto.getCategory(),
-                        transactionDto.getDescription(),
-                        transactionDto.getBankId(),
-                        transactionDto.getCreatedAt(),
-                        myUserData.getMyUser(),
-                        transactionDto.getCashBackSum())
+            new Transaction(transactionDto.getTransactionSum(),
+            transactionDto.getCategory(),
+            transactionDto.getDescription(),
+            transactionDto.getBankId(),
+            transactionDto.getCreatedAt(),
+            myUserData.getMyUser(),
+            transactionDto.getCashBackSum())
         );
+
         myUserData.getMyUser()
-                .setAccountBalance(myUserData
-                        .getMyUser()
-                        .getAccountBalance()
-                        .add(transactionDto.getTransactionSum())
-                );
+            .setAccountBalance(myUserData
+                .getMyUser()
+                .getAccountBalance()
+                .add(transactionDto.getTransactionSum())
+        );
     }
 }

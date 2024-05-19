@@ -24,32 +24,44 @@ public class UserService {
     @Transactional
     public String encryptPasswordAndSaveNewUser(UserDto userDto) {
         if(!userRepository.existsByUsername(userDto.getUsername())) {
-            userRepository.save(new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new BigDecimal(0)));
+            userRepository.save(
+                new User(
+                    userDto.getUsername(),
+                    passwordEncoder.encode(userDto.getPassword()),
+                    new BigDecimal(0)
+                )
+            );
+
             return "";
         }
+
         return "there is user with such name!";
     }
 
     @Transactional
     public BigDecimal calculateMyBalance() {
         StatementAnalyzerService statementAnalyzerService = getStatementAnalyzerByAllMyTransactions();
+
         return statementAnalyzerService.calculateTotalAmount();
     }
 
     @Transactional
     public BigDecimal calculateMyBalanceByMonth(Month month) {
         StatementAnalyzerService statementAnalyzerService = getStatementAnalyzerByAllMyTransactions();
+
         return statementAnalyzerService.calculateTotalInMonth(month);
     }
 
     @Transactional
     public BigDecimal calculateMyBalanceByCategory(String category) {
         StatementAnalyzerService statementAnalyzerService = getStatementAnalyzerByAllMyTransactions();
+
         return statementAnalyzerService.calculateTotalForCategory(category);
     }
 
-    private StatementAnalyzerService getStatementAnalyzerByAllMyTransactions() {
+    public StatementAnalyzerService getStatementAnalyzerByAllMyTransactions() {
         return new StatementAnalyzerService(
-                transactionRepository.findAllByUser(myUserData.getMyUser()));
+            transactionRepository.findAllByUser(myUserData.getMyUser())
+        );
     }
 }
