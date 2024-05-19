@@ -13,10 +13,12 @@ import java.util.Collections;
 @Setter
 public class CustomUserDetails implements UserDetails {
     private User user;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();
     }
+
     @Override
     public String getPassword() {
         return user.getPassword();

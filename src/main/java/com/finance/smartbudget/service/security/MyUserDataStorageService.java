@@ -25,7 +25,4 @@ public class MyUserDataStorageService {
         }
         throw new IllegalArgumentException("Your account does not exists");
     }
-    public String getMyUsername () {
-        return getMyUser().getUsername();
-    }
 }

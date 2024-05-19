@@ -16,7 +16,7 @@ public class StatementAnalyzerService {
     public BigDecimal calculateTotalAmount() {
         BigDecimal total = BigDecimal.ZERO;
         for (final Transaction bankTransaction : bankTransactions) {
-            total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(),bankTransaction.getCashBackSum()));
+            total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(), bankTransaction.getCashBackSum()));
         }
         return total;
     }
@@ -25,7 +25,7 @@ public class StatementAnalyzerService {
         BigDecimal total = BigDecimal.ZERO;
         for (final Transaction bankTransaction : bankTransactions) {
             if (bankTransaction.getCreatedAt().getMonth() == month) {
-                total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(),bankTransaction.getCashBackSum()));
+                total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(), bankTransaction.getCashBackSum()));
             }
         }
         return total;
@@ -35,23 +35,25 @@ public class StatementAnalyzerService {
         BigDecimal total = BigDecimal.ZERO;
         for (final Transaction bankTransaction : bankTransactions) {
             if (bankTransaction.getDescription().equals(category)) {
-                total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(),bankTransaction.getCashBackSum()));
+                total = total.add(subtractCashBaskFromSum(bankTransaction.getTransactionSum(), bankTransaction.getCashBackSum()));
             }
         }
         return total;
     }
-    public BigDecimal subtractCashBaskFromSum(BigDecimal transactionSum,BigDecimal cashBackSum) {
+
+    public BigDecimal subtractCashBaskFromSum(BigDecimal transactionSum, BigDecimal cashBackSum) {
         return transactionSum.subtract(cashBackSum);
     }
+
     public List<BalancePointDto> convertTransactionsToBalancePoints() {
         List<BalancePointDto> balancePoints = new ArrayList<>();
         BigDecimal prevUserBalance = BigDecimal.ZERO;
         for (Transaction transaction : bankTransactions) {
-            prevUserBalance = prevUserBalance.add(subtractCashBaskFromSum(transaction.getTransactionSum(),transaction.getCashBackSum()));
+            prevUserBalance = prevUserBalance.add(subtractCashBaskFromSum(transaction.getTransactionSum(), transaction.getCashBackSum()));
             balancePoints.add(
-                new BalancePointDto(
-                    prevUserBalance,
-                    transaction.getCreatedAt())
+                    new BalancePointDto(
+                            prevUserBalance,
+                            transaction.getCreatedAt())
             );
         }
         return balancePoints;

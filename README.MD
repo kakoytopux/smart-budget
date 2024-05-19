@@ -45,15 +45,16 @@ docker compose up в папке docker
 
 Ниже приведены основные конечные точки, доступные в приложении:
 
-- **POST /upload**: Загрузить файл.
-- **POST /sign-up**: Зарегистрировать нового пользователя.
-- **POST /forecast-balance-on-month**: Прогноз баланса на следующий месяц.
-- **POST /forecast-balance-at-date**: Прогноз баланса на определенную дату.
+- **POST /api/upload**: Загрузить файл.
+- **POST /sign-up**: Зарегистрировать нового пользователя и получить токен доступа.
+- **POST /sign-in** Авторизоваться
+- **POST /api/forecast-balance-on-month**: Прогноз баланса на следующий месяц.
+- **POST /api/forecast-balance-at-date**: Прогноз баланса на определенную дату.
 - **POST /api/add-my-transaction**: Добавить новую транзакцию.
 - **GET /isAlive**: Конечная точка проверки состояния.
-- **GET /get-my-balance**: Получить баланс текущего пользователя.
-- **GET /get-my-balance-in-month/{month}**: Получить баланс за определенный месяц.
-- **GET /get-my-balance-in-month/{category}**: Получить баланс по определенной категории.
+- **GET /api/get-my-balance**: Получить баланс текущего пользователя.
+- **GET /api/get-my-balance-in-month/{month}**: Получить баланс за определенный месяц.
+- **GET /api/get-my-balance-by-category/{category}**: Получить баланс по определенной категории.
 - **GET /api/get-all-my-transactions**: Получить все транзакции текущего пользователя.
 
 ### Сервисы

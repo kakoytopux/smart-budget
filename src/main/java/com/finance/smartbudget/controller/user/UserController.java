@@ -4,6 +4,7 @@ import com.finance.smartbudget.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/")
 public class UserController {
     private final UserService userService;
 
@@ -34,8 +36,8 @@ public class UserController {
     /**
      Получение товара только определенной категории
      */
-    @GetMapping("/get-my-balance-in-month/{category}")
+    @GetMapping("/get-my-balance-by-category/{category}")
     public Map<String, BigDecimal> getMyBalanceForCategory(@PathVariable String category) {
-        return Map.of("my_balance_in_month", userService.calculateMyBalanceByCategory(category));
+        return Map.of("my_balance_by_category", userService.calculateMyBalanceByCategory(category));
     }
 }

@@ -26,6 +26,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
     private final UserService userService;
     private final JwtAuthFilter jwtAuthFilter;
 
@@ -33,29 +34,6 @@ public class SecurityConfig {
     public UserDetailsService getUserDetailsService() {
         return new CustomUserDetailsService();
     }
-
-//    @Bean
-//    public SecurityFilterChain setSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(auth ->
-//                        auth.requestMatchers(
-//                                        "/sign-up",
-//                                        "/sign-up-page",
-//                                        "/sign-in-page",
-//                                        "/actuator/prometheus",
-//                                        "/swagger-ui.html",
-//                                        "/swagger-ui/**",
-//                                        "/**",
-//                                        "/isAlive",
-//                                        "/v3/api-docs/**"
-//                                )
-//                                .permitAll()
-//                                .requestMatchers("/**").authenticated())
-//                .formLogin(form -> form
-//                        .loginPage("/sign-in-page")
-//                        .permitAll())
-//                .build();
-//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -87,8 +65,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-
 
     @Bean
     public AuthenticationProvider authenticationProvider() {

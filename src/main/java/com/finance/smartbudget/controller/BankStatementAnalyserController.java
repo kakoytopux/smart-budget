@@ -1,10 +1,13 @@
 package com.finance.smartbudget.controller;
 
+import com.finance.smartbudget.mapping.TransactionsMapper;
 import com.finance.smartbudget.model.Transaction;
 import com.finance.smartbudget.parsers.BankStatementCSVParser;
 import com.finance.smartbudget.parsers.BankStatementParser;
 import com.finance.smartbudget.service.StatementAnalyzerService;
+import com.finance.smartbudget.service.TransactionsService;
 import io.swagger.annotations.ApiParam;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +23,13 @@ import java.time.Month;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/")
 public class BankStatementAnalyserController {
 
     private static final BankStatementParser bankStatementParser = new BankStatementCSVParser();
+    private final TransactionsService transactionsService;
+    private final TransactionsMapper transactionsMapper = new TransactionsMapper();
 
     private static void collectSummary(final StatementAnalyzerService statementAnalyzerService) {
         System.out.println("The total for all transactions is "
@@ -50,7 +57,8 @@ public class BankStatementAnalyserController {
             File testFile = new File("test");
             FileUtils.writeByteArrayToFile(testFile, file.getBytes());
             List<String> lines = FileUtils.readLines(testFile);
-            lines.forEach(line -> System.out.println(line));
+            processFileAndSaveTransactions(lines);
+            lines.forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>("Failed", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,10 +66,13 @@ public class BankStatementAnalyserController {
         return new ResponseEntity<>("Done", HttpStatus.OK);
     }
 
-    public void processFile(List<String> lines) {
+    public void processFileAndSaveTransactions(List<String> lines) {
         final List<Transaction> bankTransactions = bankStatementParser.parseLines(lines);
+        for (Transaction bankTransaction : bankTransactions) {
+            transactionsService.addMyTransactionAndUpdateBalance(
+                    transactionsMapper.convertEntity2Dto(bankTransaction));
+        }
         final StatementAnalyzerService statementAnalyzerService = new StatementAnalyzerService(bankTransactions);
-
         collectSummary(statementAnalyzerService);
     }
 }

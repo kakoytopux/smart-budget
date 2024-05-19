@@ -26,18 +26,17 @@ public class UserService {
 
     @Transactional
     public String encryptPasswordAndSaveNewUser(UserDto userDto) {
-        if(!userRepository.existsByUsername(userDto.getUsername())) {
+        if (!userRepository.existsByUsername(userDto.getUsername())) {
             userRepository.save(
-                new User(
-                    userDto.getUsername(),
-                    passwordEncoder.encode(userDto.getPassword()),
-                    new BigDecimal(0)
-                )
+                    new User(
+                            userDto.getUsername(),
+                            passwordEncoder.encode(userDto.getPassword()),
+                            new BigDecimal(0)
+                    )
             );
 
             return "";
         }
-
         return "there is user with such name!";
     }
 
@@ -46,6 +45,7 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
         return new CustomUserDetails(user);
     }
+
     public UserDetailsService userDetailsService() {
         return this::getByUsername;
     }
@@ -73,7 +73,7 @@ public class UserService {
 
     public StatementAnalyzerService getStatementAnalyzerByAllMyTransactions() {
         return new StatementAnalyzerService(
-            transactionRepository.findAllByUser(myUserData.getMyUser())
+                transactionRepository.findAllByUser(myUserData.getMyUser())
         );
     }
 

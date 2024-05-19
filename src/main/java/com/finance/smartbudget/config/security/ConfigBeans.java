@@ -13,4 +13,5 @@ public class ConfigBeans {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

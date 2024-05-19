@@ -13,5 +13,10 @@ import java.math.BigDecimal;
 public class UserDto {
     private String username;
     private String password;
-    private final BigDecimal accountBalance = new BigDecimal(0);
+    private BigDecimal accountBalance = new BigDecimal(0);
+
+    public UserDto(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
