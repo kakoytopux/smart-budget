@@ -63,3 +63,5 @@ build/
 /docker/prometheus/01HY7XXBSEXSG4A05JB9YGKXSC/index
 /docker/prometheus/01HY7XXBSEXSG4A05JB9YGKXSC/meta.json
 /docker/prometheus/01HY7XXBSEXSG4A05JB9YGKXSC/tombstones
+/docker/grafana/**
+/docker/prometheus/**

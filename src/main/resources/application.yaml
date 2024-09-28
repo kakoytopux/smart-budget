@@ -30,9 +30,14 @@ management:
     metrics:
       export:
         enabled: true
-  springdoc:
-    swagger-ui:
-      enabled: true
+springdoc:
+  swagger-ui:
+    enabled: true
 token:
   signing:
-    key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
+    key: dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXl0ZXN0cGFzc2tleXRlc3RwYXNza2V5dGVzdHBhc3NrZXk
+app:
+  jwtSettings:
+    jwtSecret: "PT09PT09PT09PT09PT09PT09PT09PVBST0pFQ1RfU0VDUkVUPT09PT09PT09PT09PT09PT09PT09PT09PT09"
+    jwtExpirationMs: 86400000 #Ms
+    securityApiAccountPrefix: "/api/security/account"
