@@ -56,8 +56,8 @@ PS:
 Ниже приведены основные конечные точки, доступные в приложении:
 
 - **POST /api/upload**: Загрузить файл.
-- **POST /sign-up**: Зарегистрировать нового пользователя и получить токен доступа.
-- **POST /sign-in** Авторизоваться
+- **POST /api/security/account/sign-up**: Зарегистрировать нового пользователя и получить токен доступа.
+- **POST /api/security/account/sign-in** Авторизоваться
 - **POST /api/forecast-balance-on-month**: Прогноз баланса на следующий месяц.
 - **POST /api/forecast-balance-at-date**: Прогноз баланса на определенную дату.
 - **POST /api/add-my-transaction**: Добавить новую транзакцию.
