@@ -9,7 +9,7 @@
 3. Распаковать архив, разместить `jar-файл` в одной папке с application.yaml
 4. Зайти в папку docker и через консоль выполнить: docker compose up
 5. Убедится, что версия java не ниже 17 (для проверки в консоли выполнить: java -version)
-6. В консоли этой папки выполнить: java -jar CURRENT_JAR_FILE_NAME.jar (где CURRENT_JAR_FILE_NAME.jar - полное название актуального скачанного ранее релиза)
+6. В консоли этой папки выполнить: java -jar CURRENT_JAR_FILE_NAME.jar (где CURRENT_JAR_FILE_NAME.jar - полное название актуального jar-файла из архива (например smart-budget-0.0.1-SNAPSHOT.jar))
 7. Будет запущено приложение Spring, готово!
 
 PS:
